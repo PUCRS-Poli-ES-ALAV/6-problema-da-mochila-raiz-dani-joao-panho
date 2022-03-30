@@ -37,34 +37,7 @@ ax.set_title("fibo10000")
 ax.set_xlabel('Entrada')
 ax.set_ylabel('Iteracoes')
 fig.savefig('fibo10000.png')
-'''
-
-# ex 3
-it = 0
-def knapSack(W, wt, val, n):
-    # Base Case
-    global it
-    it += 1
-    if n == 0 or W == 0:
-        return 0
-  
-    # If weight of the nth item is
-    # more than Knapsack of capacity W,
-    # then this item cannot be included
-    # in the optimal solution
-    if (wt[n-1] > W):
-        return knapSack(W, wt, val, n-1)
-    # return the maximum of two cases:
-    # (1) nth item included
-    # (2) not included
-    else:
-        return max(
-            val[n-1] + knapSack(
-                W-wt[n-1], wt, val, n-1),
-            knapSack(W, wt, val, n-1))
-  
-# end of function knapSack
-  
+'''  
   
 #Driver Code
 val = [92, 57, 49, 68, 60, 43, 67, 84, 87, 72]

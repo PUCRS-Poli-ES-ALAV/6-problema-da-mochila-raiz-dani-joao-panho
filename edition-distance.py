@@ -6,6 +6,24 @@ s2 = "Portentoso"
 s3 = "Maven, a Yiddish word meaning accumulator of knowledge, began as an attempt to " + "simplify the build processes in the Jakarta Turbine project. There were several" + " projects, each with their own Ant build files, that were all slightly different." +"JARs were checked into CVS. We wanted a standard way to build the projects, a clear "+ "definition of what the project consisted of, an easy way to publish project information" +"and a way to share JARs across several projects. The result is a tool that can now be" +"used for building and managing any Java-based project. We hope that we have created " +"something that will make the day-to-day work of Java developers easier and generally help " +"with the comprehension of any Java-based project.";
 s4 = "This post is not about deep learning. But it could be might as well. This is the power of " +"kernels. They are universally applicable in any machine learning algorithm. Why you might" +"ask? I am going to try to answer this question in this article." + "Go to the profile of Marin Vlastelica Pogančić" + "Marin Vlastelica Pogančić Jun";
 
+def dist_bf(string1, string2):
+    global itr
+    if(len(string2) < len(string1)):
+        string2 += (len(string1)-len(string2))*" "
+    else:
+        string1 += (len(string2)-len(string1))*" "
+    print(list(string2), list(string1))
+    for i, c in enumerate(string1):
+        itr += 1
+        list(string2)[i] = c
+
+    return string2
+
+#dist_bf = dist_bf(s2, s3)
+#print(f"{dist_bf=} {itr=}")
+# s1 e s2 = 10 iterations   Resultado: 10
+# s3 e s4 = 718 iterations  Resultado: 718
+
 def dist_pd(string1,string2):
     global itr
     
@@ -16,11 +34,9 @@ def dist_pd(string1,string2):
 
     for i in range(1, size1+1):
         matrix[i][0] = matrix[i-1][0] + 1
-        itr += 1
 
     for j in range(1, size2+1):
         matrix[0][j] = matrix[0][j-1] + 1
-        itr += 1
 
     for i in range(1, size1+1): 
         for j in range(1, size2+1):
@@ -31,9 +47,10 @@ def dist_pd(string1,string2):
             matrix[i][j] = min(matrix[i-1][j] + 1, matrix[i][j-1] + 1, matrix[i-1][j-1] + custoExtra)
 
     return matrix
-
+    
+dist_pd = dist_pd(s3, s4)
 print('\n'.join([''.join(['{:4}'.format(item) for item in row]) 
-      for row in dist_pd(s3, s4)]))
-print(f"iterations: {itr}")
-# s1 e s2 = 120 iterations
-# s3 e s4 = 228641 iterations
+      for row in dist_pd]))
+print(f"{itr=} {dist_pd=}")
+# s1 e s2 = 120 iterations      Resultado: 10
+# s3 e s4 = 228641 iterations   Resultado: 557
