@@ -1,4 +1,6 @@
 from dis import dis
+from glob import glob
+from tkinter import N
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
@@ -15,13 +17,43 @@ def fiboRec(n):
     return fiboRec(n-1) + fiboRec(n-2)
 
 def fibo(n):
-    ite = 0
+    global ite
     f = [0]
     f.append(1)
     for i in range(2, n+1):
         f.append(f[i-1] + f[i-2])
         ite += 1
     return ite
+
+#print(fiboRec(30))
+
+def memoFib(n):
+    f = [-1] * (n+1)
+    #print(f)
+    return lookUpFib(f,n)
+
+def lookUpFib(f,n):
+    global ite
+    if f[n] >= 0:
+        return f[n]
+    if n <= 1:
+        f[n] = n
+    else:
+        ite +=1
+        f[n] = lookUpFib(f, n-1) + lookUpFib(f, n-2)
+    return f[n]
+
+print(memoFib(180) , ite)
+
+# Resultados
+'''
+Entrada     Ite Rec     Normal      Memo
+10          177         9           9
+20          21891       19          19
+30          2692537     29          29
+40                      39          39
+                        Linear      Linear  
+'''
 
 # Criacao de grafico
 '''
@@ -38,19 +70,3 @@ ax.set_xlabel('Entrada')
 ax.set_ylabel('Iteracoes')
 fig.savefig('fibo10000.png')
 '''  
-  
-#Driver Code
-val = [92, 57, 49, 68, 60, 43, 67, 84, 87, 72]
-wt = [23, 31, 29, 44, 53, 38, 63, 85, 89, 82]
-W = 165
-n = len(val)
-# Blocos selecionados: 1, 2, 3, 4, 6
-print(str(knapSack(W, wt, val, n)) + "\tIteracoes: " + str(it))
-#it = 0
-val = [50, 50, 64, 46, 50, 5]
-wt = [56, 59, 80, 64, 75, 17]
-W = 190
-n = len(val)
-it=0
-print(str(knapSack(W, wt, val, n)) + "\tIteracoes: " + str(it))
-#blocos 1, 2 e 5
